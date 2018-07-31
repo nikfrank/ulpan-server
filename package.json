@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/nikfrank/ulpan-server/issues"
   },
-  "homepage": "https://github.com/nikfrank/ulpan-server#readme"
+  "homepage": "https://github.com/nikfrank/ulpan-server#readme",
+  "dependencies": {}
 }
