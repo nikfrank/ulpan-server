@@ -2,6 +2,8 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const routes = require('./routes');
+
 // Set up the express app
 const app = express();
 
@@ -13,10 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Respond to requests to the base route in JSON
-app.get('/', (req, res) => {
-  res.json({
-    message: 'hello world',
-  });
-});
+app.use('/', routes);
 
 app.listen(4000, () => console.log('Example app listening on port 4000!'));
