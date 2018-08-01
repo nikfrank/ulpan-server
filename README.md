@@ -26,8 +26,8 @@ Agenda:
     - make a router, respond with fake data
     - test a GET route in the browser
     - download POSTMAN, use it to test a POST route
-  - step1: fake database using "in memory store"
-  - step2: filling out our API
+  - step1: fake database using "in memory store", basic queries
+  - step2: filling out our API's query language
 
 - Section 2: Using Postgres with an ORM
   - step#: replace all fake APIs with real APIs
@@ -38,7 +38,9 @@ Agenda:
   
 - Section 3: Identity middleware
 
-- Section 4: Full coverage testing
+- Section 4: Deployment to heroku (along with front end)
+
+- Section 5: Full coverage testing
 
 ---
 
@@ -273,11 +275,17 @@ app.use(cors());
 ```
 
 
+
+---
+
+
 ### step1: fake database using "in memory store"
 
 In order to build a better conceptual understanding of API services, before we use a real database to save edit and read our persisted entities, we'll build a fake one "in memory"
 
+
 ##### what does "in memory" mean?
+
 
 instead of saving entities to a database where they will be available for multiple servers, even if those servers crash (which they will) - we will simply store them in JSON objects / arrays which we define as variables (ie that data will only exist in the runtime memory of the server)
 
@@ -288,4 +296,54 @@ it is however, entirely unusable as a real server, as we will lose data all the 
 In many industry applications, the "facade" pattern is used as an interim solution while cloud infrastructure is acquired or server logic is implemented.
 
 
+
+
 #### in memory facade
+
+
+
+... move mocks to file
+
+```$ touch ./exerciseRoutes.js```
+```$ touch ./resultRoutes.js```
+
+import both to routes.js, move current logic to specific file
+
+
+in each, make a [] or entities to schema
+
+program each routeHandler to operate on the inMem
+
+screenshot some POSTMAN testing
+
+
+Create, Read by id, Patch by id, Query
+
+result create batch
+
+query exercise by tags contains tag / tags
+
+
+
+make sure results have tags on them, query result by tag
+
+query result by prompt contains / answer contains
+
+record datetime on result, query result by date range
+
+
+---
+
+
+annotate in this step which api calls will have which security features
+
+fill in fake user data where real user session data will be filled in later.
+
+
+---
+---
+
+
+prioritize APIs for create / edit exercise, do exercise, basic exercise query
+
+query APIs full language is step2
