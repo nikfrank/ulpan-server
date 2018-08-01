@@ -31,20 +31,14 @@ Agenda:
 
 - Section 2: Using Postgres with an ORM
   - step#: replace all fake APIs with real APIs
-  
-- Section 3: Identity middleware
-
-
-- Section 2: Server for saving exercises and results
-  - step0: booting an express server
-  - step1: defining API routes and their handlers
-    - responding with stub data
-  - step2: connecting to postgres (involves installation of postgres)
     - hydrating tables with mock data
     - reading data from the db for GET requests
     - saving data from POST requests
     - updating data with PUT or PATCH requests
+  
+- Section 3: Identity middleware
 
+- Section 4: Full coverage testing
 
 ---
 
@@ -277,3 +271,21 @@ app.use(cors());
 
 //...
 ```
+
+
+### step1: fake database using "in memory store"
+
+In order to build a better conceptual understanding of API services, before we use a real database to save edit and read our persisted entities, we'll build a fake one "in memory"
+
+##### what does "in memory" mean?
+
+instead of saving entities to a database where they will be available for multiple servers, even if those servers crash (which they will) - we will simply store them in JSON objects / arrays which we define as variables (ie that data will only exist in the runtime memory of the server)
+
+the benefit of this is that it is super easy and clear what is going on
+
+it is however, entirely unusable as a real server, as we will lose data all the time.
+
+In many industry applications, the "facade" pattern is used as an interim solution while cloud infrastructure is acquired or server logic is implemented.
+
+
+#### in memory facade
