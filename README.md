@@ -248,4 +248,6 @@ routes.post('/result', (req, res)=> {
 });
 ```
 
-to test this we'll need to install POSTMAN
+to test this we'll need to install [POSTMAN](https://www.getpostman.com/docs/v6/postman/launching_postman/installation_and_updates)
+
+
