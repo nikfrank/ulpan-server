@@ -21,12 +21,17 @@ Agenda:
     - databases on the cloud
 
 - Section 1: Using ExpressJS to expose an API
-  - hello world
-  - make a router, respond with fake data
-  - test a GET route in the browser
-  - download POSTMAN, use it to test a POST route
-- Section 2: Using Postgres with an ORM
+  - step0: boot server and set up route handlers
+    - hello world
+    - make a router, respond with fake data
+    - test a GET route in the browser
+    - download POSTMAN, use it to test a POST route
+  - step1: fake database using "in memory store"
+  - step2: filling out our API
 
+- Section 2: Using Postgres with an ORM
+  - step#: replace all fake APIs with real APIs
+  
 - Section 3: Identity middleware
 
 
