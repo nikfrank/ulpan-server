@@ -251,3 +251,24 @@ routes.post('/result', (req, res)=> {
 to test this we'll need to install [POSTMAN](https://www.getpostman.com/docs/v6/postman/launching_postman/installation_and_updates)
 
 
+lastly, to use this from our frontend - we'll need to apply a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) [middleware](https://expressjs.com/en/resources/middleware/cors.html), as our server is on 'localhost:4000' and our app runs on 'localhost:3000'
+
+```$ yarn add cors```
+
+./index.js
+```js
+const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const routes = require('./routes');
+
+// Set up the express app
+const app = express();
+
+// Allow CORS
+app.use(cors());
+
+//...
+```
