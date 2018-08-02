@@ -57,7 +57,7 @@ export default [
   {
     id: '6',
     pack: 'cafe',
-    tags: ['noun', 'nosh'],
+    tags: ['noun', 'nosh', 'politics'],
     prompt: 'אבטיח מחולק עם פטה בצד',
     answer: [
       'sliced watermelon with feta on the side',

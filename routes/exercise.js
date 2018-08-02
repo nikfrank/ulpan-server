@@ -19,10 +19,16 @@ module.exports = routes=> {
   });
 
   routes.post('/exercise/query', (req, res)=> {
-    console.log( req.body );
+    const matchesPack = !req.body.pack ? inMem : (
+      inMem.filter( exercise => exercise.pack === req.body.pack )
+    );
 
-    // here we'll filter inMem based on the query from req.body
+    const containsTag = !req.body.tag ? matchesPack : (
+      matchesPack.filter( exercise => exercise.tags.indexOf( req.body.tag ) > -1 )
+    );
 
-    res.json( inMem );
+    const queryResponse = containsTag;
+    
+    res.json( queryResponse );
   });
 };

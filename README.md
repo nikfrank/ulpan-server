@@ -478,6 +478,8 @@ here I'm assuming ```Math.random()``` will be sufficiently unique. Once we integ
 also note that we make a copy of ```req.body```, which will avoid any problems of garbage collecting the request object.
 
 
+we can now test in POSTMAN our READ, then our CREATE, then our READ again (from which we should see also a new exercise created)
+
 
 #### QUERY exercise
 
@@ -523,6 +525,79 @@ now our exercises will have a bit more to them:
 ```
 
 it'll be useful to make at least two different ```pack```s, so the front end can select from between them.
+
+
+now we can write a query routeHandler with logic that will filter exercises based on the request body
+
+
+
+./routes/exercise.js
+```js
+//...
+
+  routes.post('/exercise/query', (req, res)=> {
+    //...
+
+    res.json( queryResponse );
+  });
+
+//...
+```
+
+first, if there is a ```pack``` listed in ```req.body``` (our query JSON), we will filter for all exercises exactly matching the pack name
+
+```js
+    //...
+    
+    const matchesPack = !req.body.pack ? inMem : (
+      inMem.filter( exercise => exercise.pack === req.body.pack )
+    );
+    
+    //...
+```
+
+next, if there is a ```tag``` in the query, we'll only respond with exercises listing that tag
+
+```js
+    //...
+    
+    const containsTag = !req.body.tag ? matchesPack : (
+      matchesPack.filter( exercise => exercise.tags.indexOf( req.body.tag ) > -1 )
+    );
+    
+    //...
+```
+
+finally, we'll respond with the filtered list
+
+```js
+    //...
+    
+    const queryResponse = containsTag;
+    
+    res.json( queryResponse );
+  }
+
+//...
+```
+
+this kind of query logic will often be handled in a database or ORM layer. For now, we are the database, so we can implement a simple query logic just in javascript!
+
+
+
+---
+
+The result READ ALL and CREATE routes will be exactly the same, and so I feel comfortable leaving them as an exercise
+
+The QUERY route for result, we will be querying by ```prompt``` or ```guess``` contains some word, as well as by score
+
+to do so, we should learn to use [String.prototype.split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) in our filter function
+
+other than that, it should be the same as ```exercise```
+
+
+---
+
 
 
 
