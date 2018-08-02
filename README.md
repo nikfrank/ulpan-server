@@ -584,6 +584,12 @@ finally, we'll respond with the filtered list
 this kind of query logic will often be handled in a database or ORM layer. For now, we are the database, so we can implement a simple query logic just in javascript!
 
 
+##### documenting query APIs
+
+it is VERY important to document our APIs, and especially important when we are defining a custom QUERY logic
+
+let's take a minute to learn a few tactics in markdown which will be userful in explaining to our front end devs how to use our APIs without talking to us in person or bothering us on the telephone!
+
 
 ---
 
