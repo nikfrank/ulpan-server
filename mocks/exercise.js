@@ -2,6 +2,7 @@ export default [
   {
     id: '0',
     pack: 'basics',
+    tags: ['comparison', 'gerund'],
     prompt: 'עישון שווה לעבדות',
     answer: [
       'smoking is slavery',
@@ -11,6 +12,7 @@ export default [
   {
     id: '1',
     pack: 'basics',
+    tags: ['comparison', 'politics'],
     prompt: 'מסים לא שונים לגניבה ',
     answer: [
       'taxes are no different than theft',
@@ -20,6 +22,7 @@ export default [
   {
     id: '2',
     pack: 'basics',
+    tags: ['comparison', 'politics'],
     prompt: 'לא אפשר לחנות בתל אביב',
     answer: [
       'you can not park in Tel Aviv',
@@ -29,4 +32,16 @@ export default [
       'there\'s no parking in Tel Aviv',
     ],
   },
+
+  {
+    id: '4',
+    pack: 'animals',
+    tags: ['noun', 'animal'],
+    prompt: '',
+    answer: [
+      'taxes are no different than theft',
+      'tax is theft',
+    ],
+  },
+
 ];

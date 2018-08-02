@@ -481,8 +481,48 @@ also note that we make a copy of ```req.body```, which will avoid any problems o
 
 #### QUERY exercise
 
+whenever we get a task in server development for a "query" route, our real job is to define a query language which will be possible to apply to our data.
+
+here, our exercises so far only have a ```prompt: 'string'``` and ```answer: ['string']``` with which to query
+
+so it'd be possible to query against which words are in the prompt or answers, but this isn't going to be very feature rich
 
 
+one feature on the front end will be "exercise packs", which can be implemented as a unique string identifier on each exercise (querying against strict equality will be very easy to implement)
+
+another we may be interested in is having an array of ```tags``` on each exercise - describing the nature of the material (grammar or vocabulary) - which we could query ```tags contains 'string'```
+
+
+##### extend our exercise schema with pack name, tags for querying
+
+adding to the list of mock exercises will allow our front end devs to build the ```DoExercise``` and ```CreateExercise``` views with all of their basic features using only our fake data.
+
+Front end features
+- query lesson pack, then do the lesson
+- query exercise by tags, then do the lesson
+- create exercises in lesson packs, with queryable tags
+
+(in the next section we'll add UPDATE routes for editing exercises... not quite yet!)
+
+now our exercises will have a bit more to them:
+
+./mocks/exercise.js
+```js
+//...
+  {
+    id: '1',
+    pack: 'basics',
+    tags: ['comparison', 'politics'],
+    prompt: 'מסים לא שונים לגניבה ',
+    answer: [
+      'taxes are no different than theft',
+      'tax is theft',
+    ],
+  },
+//...
+```
+
+it'll be useful to make at least two different ```pack```s, so the front end can select from between them.
 
 
 
