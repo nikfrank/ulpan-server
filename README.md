@@ -27,7 +27,16 @@ Agenda:
     - test a GET route in the browser
     - download POSTMAN, use it to test a POST route
   - step1: fake database using "in memory store", basic queries
-  - step2: filling out our API's query language
+    - reorganize directories
+    - route application functions
+    - routeHandler boilerplate
+    - READ ALL exercise
+    - CREATE exercise
+    - QUERY exercise
+    - READ ALL result
+    - CREATE result
+    - QUERY result
+  - step2: filling out our API's query language, update route
 
 - Section 2: Using Postgres with an ORM
   - step#: replace all fake APIs with real APIs
@@ -298,19 +307,186 @@ In many industry applications, the "facade" pattern is used as an interim soluti
 
 
 
-#### in memory facade
+#### organize our directories
+
+let's organize routes for each of our entities (results, exercises)
+
+(many servers are organized differently than this, its important though that we have **some** organization scheme)
+
+```
+$ mkdir ./routes
+$ mv routes.js ./routes/index.js
+$ touch ./routes/exercise.js
+$ touch ./routes/result.js
+$ mkdir ./mocks
+$ touch ./mocks/exercise.js
+```
+
+our routes index will now make a router and apply the entity specific routes
+
+./routes/index.js
+```js
+const express = require('express');
+const routes = express.Router();
+
+const applyExerciseRoutes = require('./routes/exercise');
+const applyResultRoutes = require('./routes/result');
+
+applyExerciseRoutes( routes );
+applyResultRoutes( routes );
+
+module.exports = routes;
+```
+
+
+#### route application functions
+
+
+what we'll do in each file of entity specific routes is:
+- export a function which accepts the router as a param
+- instantiate an in memory store inside the function
+- apply each route to the router
+
+the purpose of this is just to keep our logic separate for each entity
+
+often, the work done on an api server has more to do with organization than complex logic.
+
+
+./routes/exercise.js
+```js
+const mockExercises = require('../mocks/exercise');
+
+module.exports = routes=> {
+
+  // make a copy of the mock to "hydrate" the in memory store
+  let inMem = JSON.parse( JSON.stringify( mockExercises ) );
+
+  //... here we'll apply the routes
+}
+```
+
+I've moved the exercise mock we had in ./routes.js to our new ```/mocks``` directory
+
+
+#### routeHandler boilerplate
+
+
+now we can set up the boilerplate for our routes
+
+./routes/exercise.js
+```js
+const mockExercises = require('../mocks/exercise');
+
+module.exports = routes=> {
+
+  let inMem = JSON.parse( JSON.stringify( mockExercises ) );
+  
+  routes.get('/exercise', (req, res)=> {
+    // here we'll return the exercises in the in memory store
+  });
+
+  routes.post('/exercise', (req, res)=> {
+    // here we'll save the value from req.body into our in memory store
+  });
+
+  routes.post('/exercise/query', (req, res)=> {
+    // here we'll filter inMem based on the query from req.body
+  });
+};
+```
+
+similarly in ./routes/result.js (just copy paste, find & replace: exercise -> result)
+
+
+we'll of course at this point want some fake results as well
+
+./mocks/result.js
+```js
+export default [
+  {
+    id: '0',
+    score: 1,
+    prompt:'עישון שווה לעבדות',
+    guess: 'smoking is slavery',
+  }, {
+    id: '1',
+    score: 1,
+    prompt: 'מסים לא שונים לגניבה ',
+    guess: 'tax is theft',
+  }, {
+    id: '2',
+    score: 1,
+    prompt: 'לא אפשר לחנות בתל אביב',
+    guess: 'there\'s no parking in Tel Aviv',
+  },
+];
+```
+
+we may as well pretend like we got everything right!
+
+
+In the same fashion, I've also added a unique ```id``` field on each item in ./mocks/exercise.js
+
+---
+
+at this point I've also deleted ```./routes.js``` in favour of the new ```./routes/index.js```
+
+the way commonJS ```require``` naming conventions work means we don't have to change anything in ```./index.js```!
+
+---
+
+#### READ ALL exercises
+
+firstly, our READ ALL route will be pretty easy... just respond with the exercises in the store
+
+./routes/exercise.js
+```js
+//...
+  let inMem = JSON.parse( JSON.stringify( mockExercises ) );
+
+  routes.get('/exercise', (req, res)=> {
+    res.json( inMem );
+  });
+
+//...
+```
+
+#### CREATE exercise
+
+
+to create a new exercise, we'll first create a unique id
+
+here I'm assuming ```Math.random()``` will be sufficiently unique. Once we integrate to a database, the database will be in charge of generating the unique ```id```.
+
+./routes/exercise.js
+```js
+//...
+
+  routes.post('/exercise', (req, res)=> {
+    const newId = ''+Math.random();
+    const newExercise = JSON.parse( JSON.stringfy( req.body ) );
+    
+    newExercise.id = newId;
+    inMem.push( newExercise );
+
+    res.status(201).json({ createdId: newId });
+  });
+  
+//...
+```
+
+also note that we make a copy of ```req.body```, which will avoid any problems of garbage collecting the request object.
 
 
 
-... move mocks to file
-
-```$ touch ./exerciseRoutes.js```
-```$ touch ./resultRoutes.js```
-
-import both to routes.js, move current logic to specific file
+#### QUERY exercise
 
 
-in each, make a [] or entities to schema
+
+
+
+
+---
 
 program each routeHandler to operate on the inMem
 
