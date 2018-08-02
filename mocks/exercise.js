@@ -35,13 +35,33 @@ export default [
 
   {
     id: '4',
-    pack: 'animals',
-    tags: ['noun', 'animal'],
-    prompt: '',
+    pack: 'cafe',
+    tags: ['noun', 'drink'],
+    prompt: 'הפוך גדול',
     answer: [
-      'taxes are no different than theft',
-      'tax is theft',
+      'upside-down large',
+      'large cappuccino',
+    ],
+  },
+  
+  {
+    id: '5',
+    pack: 'cafe',
+    tags: ['noun', 'drink'],
+    prompt: 'תה נענע',
+    answer: [
+      'mint tea',
     ],
   },
 
+  {
+    id: '6',
+    pack: 'cafe',
+    tags: ['noun', 'nosh'],
+    prompt: 'אבטיח מחולק עם פטה בצד',
+    answer: [
+      'sliced watermelon with feta on the side',
+      'why is there feta next to my watermelon?',
+    ],
+  },
 ];
