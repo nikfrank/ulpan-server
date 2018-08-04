@@ -33,10 +33,12 @@ Agenda:
     - READ ALL exercise
     - CREATE exercise
     - QUERY exercise
+    - packs reference API
     - READ ALL result
     - CREATE result
     - QUERY result
   - step2: filling out our API's query language, update route
+    - adding tags to the packs API
 
 - Section 2: Using Postgres with an ORM
   - step#: replace all fake APIs with real APIs
