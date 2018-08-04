@@ -33,4 +33,14 @@ module.exports = routes=> {
     
     res.json( queryResponse );
   });
+
+
+  routes.get('/exercise/packs', (req, res)=>{
+    const packs = inMem.map( exercise => exercise.pack );
+
+    const packIndex = {};
+    packs.forEach( pack=> (packIndex[pack] = (packIndex[pack]||0) +1 ) );
+
+    res.json(packIndex);
+  });
 };

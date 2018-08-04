@@ -598,6 +598,35 @@ finally, we'll respond with the filtered list
 this kind of query logic will often be handled in a database or ORM layer. For now, we are the database, so we can implement a simple query logic just in javascript!
 
 
+#### packs reference API
+
+our upcoming features on the front end are requesting a reference API which will respond with the list of "pack" values, along with the number of exercises each contains
+
+
+let's add this route as GET /exercise/packs
+
+./routes/exercise.js
+```js
+//...
+
+  routes.get('/exercise/packs', (req, res)=>{
+    const packs = inMem.map( exercise => exercise.pack );
+
+    const packIndex = {};
+    packs.forEach( pack=> (packIndex[pack] = (packIndex[pack]||0) +1 ) );
+
+    res.json(packIndex);
+  });
+};
+```
+
+looping over the packs with a ```.forEach``` to count cards in each pack is simple enough
+
+this same task can be accomplished also with ```.map``` ```.reduce``` and ```Object.assign```, or many other ways. The enterprising student will treat a simple exercise like this as a [kata](https://www.google.com/search?q=code+katas), and use it to hone their instincts!
+
+
+
+
 ##### documenting query APIs
 
 it is VERY important to document our APIs, and especially important when we are defining a custom QUERY logic
