@@ -652,22 +652,19 @@ other than that, it should be the same as ```exercise```
 
 ---
 
-program each routeHandler to operate on the inMem
 
 screenshot some POSTMAN testing
 
 
-Create, Read by id, Patch by id, Query
+Read by id, Patch by id, Query ++
 
-result create batch
+result create batch ...
 
-query exercise by tags contains tag / tags
+query exercise by tags contains tag / +tags+
 
 
 
-make sure results have tags on them, query result by tag
-
-query result by prompt contains / answer contains
+step2:
 
 record datetime on result, query result by date range
 
@@ -687,3 +684,22 @@ fill in fake user data where real user session data will be filled in later.
 prioritize APIs for create / edit exercise, do exercise, basic exercise query
 
 query APIs full language is step2
+
+
+---
+---
+
+### intermezzo for testing
+
+after step1, perhaps taking a moment to cover the basics of supertest will be in order
+
+- hydrate
+- create exercise
+- read all exercises
+- query exercises
+- get exercise packs 
+- create result
+- read all results
+- query results
+
+flow for each test is simple, this is a good time to introduce black box server tests.
