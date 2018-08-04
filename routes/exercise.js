@@ -5,12 +5,14 @@ module.exports = routes=> {
   let inMem = JSON.parse( JSON.stringify( mockExercises ) );
   
   routes.get('/exercise', (req, res)=> {
+    // test that we have all required fields
+    
     res.json( inMem );
   });
 
   routes.post('/exercise', (req, res)=> {
     const newId = ''+Math.random();
-    const newExercise = JSON.parse( JSON.stringfy( req.body ) );
+    const newExercise = JSON.parse( JSON.stringify( req.body ) );
     
     newExercise.id = newId;
     inMem.push( newExercise );

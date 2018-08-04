@@ -329,8 +329,8 @@ our routes index will now make a router and apply the entity specific routes
 const express = require('express');
 const routes = express.Router();
 
-const applyExerciseRoutes = require('./routes/exercise');
-const applyResultRoutes = require('./routes/result');
+const applyExerciseRoutes = require('./exercise');
+const applyResultRoutes = require('./result');
 
 applyExerciseRoutes( routes );
 applyResultRoutes( routes );
@@ -368,6 +368,7 @@ module.exports = routes=> {
 I've moved the exercise mock we had in ./routes.js to our new ```/mocks``` directory
 
 
+
 #### routeHandler boilerplate
 
 
@@ -402,30 +403,41 @@ we'll of course at this point want some fake results as well
 
 ./mocks/result.js
 ```js
-export default [
+module.exports = [
   {
     id: '0',
     score: 1,
     prompt:'עישון שווה לעבדות',
     guess: 'smoking is slavery',
+    pack: 'basics',
   }, {
     id: '1',
     score: 1,
     prompt: 'מסים לא שונים לגניבה ',
     guess: 'tax is theft',
+    pack: 'basics',
   }, {
     id: '2',
     score: 1,
     prompt: 'לא אפשר לחנות בתל אביב',
     guess: 'there\'s no parking in Tel Aviv',
+    pack: 'basics',
+  }, {
+    id: '3',
+    score: 0.5,
+    prompt: 'הפוך גדול',
+    guess: 'big cappuccino',
+    pack: 'cafe',
   },
 ];
 ```
 
-we may as well pretend like we got everything right!
+we've seen these examples enough we should be doing very well at them already!
+
 
 
 In the same fashion, I've also added a unique ```id``` field on each item in ./mocks/exercise.js
+
 
 ---
 
@@ -445,6 +457,8 @@ firstly, our READ ALL route will be pretty easy... just respond with the exercis
   let inMem = JSON.parse( JSON.stringify( mockExercises ) );
 
   routes.get('/exercise', (req, res)=> {
+    // TODO...test that we have all required fields
+      
     res.json( inMem );
   });
 
@@ -464,7 +478,7 @@ here I'm assuming ```Math.random()``` will be sufficiently unique. Once we integ
 
   routes.post('/exercise', (req, res)=> {
     const newId = ''+Math.random();
-    const newExercise = JSON.parse( JSON.stringfy( req.body ) );
+    const newExercise = JSON.parse( JSON.stringify( req.body ) );
     
     newExercise.id = newId;
     inMem.push( newExercise );

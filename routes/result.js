@@ -9,18 +9,29 @@ module.exports = routes=> {
   });
 
   routes.post('/result', (req, res)=> {
-    console.log( req.body );
+    const newId = ''+Math.random();
+    const newResult = JSON.parse( JSON.stringfy( req.body ) );
+    
+    newResult.id = newId;
+    inMem.push( newResult );
 
-    // here we'll save the value from req.body into our in memory store
-
-    res.status(201).json({ createdId: '1308f183nf' });
+    res.status(201).json({ createdId: newId });
   });
 
   routes.post('/result/query', (req, res)=> {
-    console.log( req.body );
+    const matchesPack = !req.body.pack ? inMem : (
+      inMem.filter( result => result.pack === req.body.pack )
+    );
 
-    // here we'll filter inMem based on the query from req.body
+    const containsWord = !req.body.word ? matchesPack : (
+      matchesPack.filter( result => (
+        result.prompt.indexOf( req.body.word ) > -1
+      ) || (
+        result.guess.indexOf( req.body.word) > -1
+      ) ) );
 
-    res.json( inMem );
+    const queryResponse = containsWord;
+    
+    res.json( queryResponse );
   });
 };

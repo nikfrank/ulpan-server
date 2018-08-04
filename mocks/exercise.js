@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     id: '0',
     pack: 'basics',
@@ -8,6 +8,7 @@ export default [
       'smoking is slavery',
       'smoking equals slavery',
     ],
+    component: 'FlashCard',
   },
   {
     id: '1',
@@ -18,6 +19,7 @@ export default [
       'taxes are no different than theft',
       'tax is theft',
     ],
+    component: 'FlashCard',
   },
   {
     id: '2',
@@ -31,6 +33,7 @@ export default [
       'it\'s impossible to park in Tel Aviv',
       'there\'s no parking in Tel Aviv',
     ],
+    component: 'FlashCard',
   },
 
   {
@@ -42,6 +45,7 @@ export default [
       'upside-down large',
       'large cappuccino',
     ],
+    component: 'FlashCard',
   },
   
   {
@@ -52,6 +56,7 @@ export default [
     answer: [
       'mint tea',
     ],
+    component: 'FlashCard',
   },
 
   {
@@ -63,5 +68,6 @@ export default [
       'sliced watermelon with feta on the side',
       'why is there feta next to my watermelon?',
     ],
+    component: 'FlashCard',
   },
 ];

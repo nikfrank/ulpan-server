@@ -1,8 +1,8 @@
 const express = require('express');
 const routes = express.Router();
 
-const applyExerciseRoutes = require('./routes/exercise');
-const applyResultRoutes = require('./routes/result');
+const applyExerciseRoutes = require('./exercise');
+const applyResultRoutes = require('./result');
 
 applyExerciseRoutes( routes );
 applyResultRoutes( routes );
