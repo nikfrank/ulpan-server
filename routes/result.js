@@ -10,7 +10,7 @@ module.exports = routes=> {
 
   routes.post('/result', (req, res)=> {
     const newId = ''+Math.random();
-    const newResult = JSON.parse( JSON.stringfy( req.body ) );
+    const newResult = JSON.parse( JSON.stringify( req.body ) );
     
     newResult.id = newId;
     inMem.push( newResult );
